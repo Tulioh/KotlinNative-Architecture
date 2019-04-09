@@ -35,6 +35,7 @@
     <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.florent37:multiplatform-livedata:0.0.5" level="project" />
     <orderEntry type="library" name="Gradle: org.kodein.di:kodein-di-core-metadata:6.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.kodein.di:kodein-di-erased-metadata:6.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />

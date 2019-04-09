@@ -7,11 +7,12 @@
 
     <application
             android:allowBackup="true"
-            android:label="@string/app_name"
+            android:label=
+                    "@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name="com.github.jeremyrempel.unsplash.MainActivity">
+        <activity android:name="br.com.zup.samples.kotlinnative.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

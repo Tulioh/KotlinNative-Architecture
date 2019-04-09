@@ -1,41 +1,29 @@
 import UIKit
 import app
 
-class ViewController: UIViewController, PhotoView {
+class ViewController: UIViewController {
     
-    lazy var presenter: PhotoPresenter = {
-        PhotoPresenter(
-            uiContext: UI() as KotlinCoroutineContext,
-            view: self
-        )
-    }()
+    var lifecycle = Multiplatform_livedata_iosKLifecycle()
     
-    var isUpdating: Bool = false
+    var homeViewModel = HomeProviderKt.homeViewModel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //label.text = Proxy().proxyHello()
         
-        presenter.onRequestData()
+        homeViewModel.getMovies().observe(lifecycle: lifecycle) { (value) -> KotlinUnit in
+            if (value as? Array<HomePresentation>) != nil {
+                // TODO: set lis
+            }
+            
+            return KotlinUnit()
+        }
     }
     
-    func showError(error: KotlinThrowable) {
-        label.text = error.message
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        lifecycle.stop()
     }
     
-    func onUpdate(data: PhotoResponse) {
-        let make = data.exif?.make ?? ""
-        
-        label.text = "id: \(data.id)\n exif.make: \(make)"
-        let imageURLString = data.urls.full
-        let url = URL(string: imageURLString)!
-        let data = try! Data(contentsOf: url)
-        imageView.image = UIImage(data: data)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
 }
