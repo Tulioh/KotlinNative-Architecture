@@ -1,7 +1,7 @@
 package br.com.zup.samples.kotlinnative.feature.home.converter
 
 import br.com.zup.samples.kotlinnative.data.entity.MovieResultsEntity
-import br.com.zup.samples.kotlinnative.feature.home.presentation.HomePresentation
+import br.com.zup.samples.kotlinnative.feature.home.viewstate.HomePresentation
 
 class HomePresentationConverter {
 

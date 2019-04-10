@@ -3,18 +3,18 @@ package br.com.zup.samples.kotlinnative.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<T : BasePresenter> : AppCompatActivity() {
 
     protected abstract fun getLayoutId(): Int?
-    protected abstract fun getViewModelInstance(): T
+    protected abstract fun getPresenterInstance(): T
     protected abstract fun initialize(savedInstanceState: Bundle?)
 
-    protected lateinit var viewModel: T
+    protected lateinit var presenter: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = getViewModelInstance()
+        presenter = getPresenterInstance()
 
         if (getLayoutId() != null) {
             setContentView(getLayoutId()!!)
@@ -26,6 +26,6 @@ abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
-        viewModel.onCleared()
+        presenter.onCleared()
     }
 }

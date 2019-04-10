@@ -1,18 +1,16 @@
 import UIKit
 import app
 
-class BaseViewController<T : BaseViewModel>: UIViewController {
+class BaseViewController<T : BasePresenter>: UIViewController, BaseView {
     
-    var lifecycle = Multiplatform_livedata_iosKLifecycle()
-    
-    lazy var viewModel: T = {
-        return getViewModelInstance()
+    lazy var presenter: T = {
+        return getPresenterInstance()
     }()
     
-    func getViewModelInstance() -> T {
+    func getPresenterInstance() -> T {
         let exception = NSException(
             name: NSExceptionName(rawValue: "Not implemented!"),
-            reason: "A concrete subclass did not provide its own implementation of getViewModelInstance()",
+            reason: "A concrete subclass did not provide its own implementation of getPresenterInstance()",
             userInfo: nil
         )
         exception.raise()
@@ -21,7 +19,11 @@ class BaseViewController<T : BaseViewModel>: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        lifecycle.stop()
-        viewModel.onCleared()
+    
+        presenter.onCleared()
+    }
+    
+    func onErrorThrown(throwable: KotlinThrowable) {
+        
     }
 }

@@ -1,25 +1,21 @@
 import UIKit
 import app
 
-class ViewController: BaseViewController<HomeViewModel> {
+class ViewController: BaseViewController<HomePresenter>, HomeView {
     
-    override func getViewModelInstance() -> HomeViewModel {
-        return HomeProviderKt.homeViewModel
+    override func getPresenterInstance() -> HomePresenter {
+        return PresenterProviderKt.provideHomePresenter(homeView: self)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        viewModel.getMovies().observe(lifecycle: lifecycle) { (value) -> KotlinUnit in
-            NSLog("Teste")
-            if (value as? Array<HomePresentation>) != nil {
-                // TODO: set movies
-            }
-            
-            return KotlinUnit()
-        }
+    @IBAction func didClickGetImages(_ sender: Any) {
+        presenter.onClickGetMovies()
     }
     
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    func onHomePresentationListUpdated(homePresentationList: Array<HomePresentation>) {
+        print(homePresentationList)
+    }
+    
+    override func onErrorThrown(throwable: KotlinThrowable) {
+        // TODO: ("not implemented")
+    }
 }
