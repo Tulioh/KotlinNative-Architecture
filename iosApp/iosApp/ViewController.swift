@@ -12,7 +12,7 @@ class ViewController: UIViewController {
         
         homeViewModel.getMovies().observe(lifecycle: lifecycle) { (value) -> KotlinUnit in
             if (value as? Array<HomePresentation>) != nil {
-                // TODO: set lis
+                // TODO: set movies
             }
             
             return KotlinUnit()
